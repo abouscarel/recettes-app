@@ -1,24 +1,36 @@
-import React, { Component } from 'react'
+import React, { Component } from "react";
 // CSS
-import './App.css'
+import "./App.css";
+
+import Header from "./components/Header";
+import Admin from "./components/Admin";
+import Card from './components/Card';
+
+import recettes from "./recettes";
 
 class App extends Component {
   state = {
-    pseudo: this.props.match.params.pseudo
-  }
+    pseudo: this.props.match.params.pseudo,
+    recettes: {}
+  };
 
-  render () {
+  chargerExemple = () => this.setState({ recettes });
+
+  render() {
+    const { pseudo, recettes } = this.state;
+
+    const cards = Object.keys(recettes).map(key => <Card key={key} details={recettes[key]} />);
+    
     return (
-      <div className='box'>
-        <h1>Bonjour {this.state.pseudo}</h1>
-        <div className='cards'>
-          <div className='card'>
-            <h2>Une Carte</h2>
-          </div>
+      <div className="box">
+        <Header pseudo={pseudo} />
+        <div className="cards">
+         { cards }
         </div>
+        <Admin chargerExemple={this.chargerExemple} />
       </div>
-    )
+    );
   }
 }
 
-export default App
+export default App;

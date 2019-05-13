@@ -18,8 +18,9 @@ class Connexion extends React.Component {
   }
 
   render () {
-    if (this.state.goToApp) {
-      return <Redirect push to={`/pseudo/${this.state.pseudo}`} />
+    const { pseudo, goToApp } = this.state;
+    if (goToApp) {
+      return <Redirect push to={`/pseudo/${pseudo}`} />
     }
 
     return (
@@ -28,7 +29,7 @@ class Connexion extends React.Component {
           <h1>Ma Boîte à Recettes</h1>
           <input
             type='text'
-            value={this.state.pseudo}
+            value={pseudo}
             onChange={this.handleChange}
             placeholder='Nom du Chef'
             pattern='[A-Za-z-]{1,}'
