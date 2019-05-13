@@ -21,6 +21,12 @@ class Admin extends Component {
     });
   }
 
+  /**
+   * Handle login with facebook success
+   * @function handleAuth
+   * @async
+   * @param  {object} authData - Facebook user
+   */
   handleAuth = async authData => {
     const box = await base.fetch(this.props.pseudo, { context: this });
     if (!box.chef) {
@@ -34,6 +40,10 @@ class Admin extends Component {
     });
   };
 
+  /**
+   * Log in with facebook
+   * @function authenticate
+   */
   authenticate = () => {
     const authProvider = new firebase.auth.FacebookAuthProvider();
     firebaseApp
@@ -42,6 +52,11 @@ class Admin extends Component {
       .then(this.handleAuth);
   };
 
+  /**
+   * Log out action
+   * @function logout
+   * @async
+   */
   logout = async () => {
     console.log("Déconnexion");
     await firebase.auth().signOut();

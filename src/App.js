@@ -13,11 +13,12 @@ import ColorContext from './components/Color';
 
 class App extends Component {
   state = {
-    pseudo: this.props.match.params.pseudo,
+    pseudo: this.props.match.params.pseudo, // Get pseudo from url
   };
 
   render() {
     const { pseudo } = this.state;
+    // Get Firebase HOC props
     const { recettes, ajouterRecette, modifierRecette, supprimerRecette, chargerExemple } = this.props;
 
     const cards = Object.keys(recettes).map(key => <Card key={key} details={recettes[key]} />);
@@ -42,6 +43,7 @@ class App extends Component {
   }
 }
 
+// Define props rules
 App.propTypes = {
   recettes: PropTypes.object.isRequired,
   ajouterRecette: PropTypes.func.isRequired,
@@ -50,6 +52,8 @@ App.propTypes = {
   chargerExemple: PropTypes.func.isRequired
 }
 
+// Wrap HOC Component with App
 const WrappedComponent = withFirebase(App)
 
+// Export Wrapped Component
 export default WrappedComponent;
